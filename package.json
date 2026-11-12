@@ -17,7 +17,8 @@
     "concurrently": "^9.2.1"
   },
   "dependencies": {
-    "@netlify/server": "^0.1.6"
+    "@netlify/blobs": "^10.0.0",
+    "@netlify/functions": "^5.0.0"
   },
   "engines": {
     "node": ">=20"

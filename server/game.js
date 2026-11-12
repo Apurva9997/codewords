@@ -603,6 +603,11 @@ export class RoomManager {
   tick(now = this.now()) {
     const changed = [];
     for (const room of this.rooms.values()) {
+      for (const player of room.players) {
+        if (player.transport === 'http' && now - (player.lastSeen || 0) > 20000) {
+          player.connected = false;
+        }
+      }
       if (
         room.turnDeadline &&
         now >= room.turnDeadline &&
@@ -647,6 +652,8 @@ export class RoomManager {
       role: null,
       connected: true,
       joinedAt: this.now(),
+      lastSeen: this.now(),
+      transport: String(socketId).startsWith('http:') ? 'http' : 'socket',
     };
   }
 
@@ -655,6 +662,8 @@ export class RoomManager {
     if (displacedSocketId) this.socketIndex.delete(displacedSocketId);
     player.socketId = socketId;
     player.connected = true;
+    player.lastSeen = this.now();
+    player.transport = String(socketId).startsWith('http:') ? 'http' : 'socket';
     this.socketIndex.set(socketId, { code: room.code, publicId: player.publicId });
     room.lastConnectedAt = this.now();
     return displacedSocketId;

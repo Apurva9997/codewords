@@ -1,5 +1,7 @@
 # Codewords
 
+Play it live: [https://codewords-897n.netlify.app](https://codewords-897n.netlify.app)
+
 A multiplayer social deduction word game for two teams. One Spymaster on each team can see the key. Operatives only see a word until someone reveals the card.
 
 This is an unofficial, open-source game inspired by the tabletop game Codenames. It does not include the commercial word list, artwork, or trademarks. The dictionary in `server/words.js` is original.
@@ -41,7 +43,9 @@ npm start
 - `client/` — React, Vite, and Tailwind
 - `server/words.js` — 400+ original words
 
-Rooms live in memory. Restarting the server clears them. Empty rooms are removed after 30 minutes.
+Rooms live in memory when you run the server locally. Restarting the server clears them. Empty rooms are removed after 30 minutes.
+
+The live site runs the same rules through a Netlify Function and stores rooms in Netlify Blobs, because a free Netlify project cannot keep a Socket.IO process running. Local `npm run dev` still uses Socket.IO.
 
 ## License
 
