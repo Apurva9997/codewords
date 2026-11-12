@@ -1,0 +1,26 @@
+{
+  "name": "codenames",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unofficial multiplayer social deduction word game. Two teams, one board, a spymaster who can see the key.",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server",
+    "test": "npm run test -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "@netlify/server": "^0.1.6"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
