@@ -14,7 +14,7 @@ function createHttpSocket() {
 
   async function post(action, payload = {}) {
     const session = loadSession();
-    const response = await fetch('/api/game', {
+    const response = await fetch('/.netlify/functions/game', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
